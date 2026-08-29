@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Free YouTube SEO Checklist. Check your title, description, keywords, thumbnail, video and publishing settings before publishing.">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <title>YouTube SEO Checklist - YTBoostKit</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        .tool-page {
+            padding: 70px 0 90px;
+        }
+
+        .tool-header {
+            max-width: 760px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .tool-header .label {
+            color: #635bff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .tool-header h1 {
+            margin-top: 12px;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .tool-header p {
+            margin-top: 18px;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* =================================
+           CHECKLIST
+           ================================= */
+
+        .checklist-box {
+
+            max-width: 800px;
+
+            margin: 0 auto;
+
+            padding: 35px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* =================================
+           PROGRESS
+           ================================= */
+
+        .progress-section {
+
+            margin-bottom: 35px;
+
+            padding: 22px;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+        }
+
+        .progress-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+        }
+
+        .progress-label {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #374151;
+        }
+
+        .score {
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            color: #635bff;
+        }
+
+        .progress-bar {
+
+            width: 100%;
+
+            height: 10px;
+
+            background: #e5e7eb;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #635bff;
+
+            border-radius: 20px;
+
+            transition: width 0.3s ease;
+        }
+
+
+        /* =================================
+           CATEGORY
+           ================================= */
+
+        .category {
+
+            margin-bottom: 28px;
+
+            padding: 22px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+        }
+
+        .category h2 {
+
+            margin: 0 0 16px;
+
+            font-size: 19px;
+
+            color: #111827;
+        }
+
+
+        /* =================================
+           CHECK ITEMS
+           ================================= */
+
+        .check-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #f3f4f6;
+
+            cursor: pointer;
+        }
+
+        .check-item:last-child {
+
+            border-bottom: none;
+
+        }
+
+        .check-item input {
+
+            width: 18px;
+
+            height: 18px;
+
+            margin-top: 2px;
+
+            accent-color: #635bff;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+        }
+
+        .check-item label {
+
+            color: #4b5563;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            cursor: pointer;
+        }
+
+        .check-item input:checked + label {
+
+            color: #9ca3af;
+
+            text-decoration: line-through;
+
+        }
+
+
+        /* =================================
+           MESSAGE
+           ================================= */
+
+        .result-message {
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            background: #f5f3ff;
+
+            border-left: 4px solid #635bff;
+
+            border-radius: 10px;
+
+            color: #374151;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =================================
+           BUTTONS
+           ================================= */
+
+        .button-row {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .reset-btn {
+
+            flex: 1;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .reset-btn:hover {
+
+            background: #e5e7eb;
+        }
+
+
+        /* =================================
+           CONTENT
+           ================================= */
+
+        .content-section {
+
+            max-width: 800px;
+
+            margin: 70px auto 0;
+        }
+
+        .content-section h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+        }
+
+        .content-section p {
+
+            margin-bottom: 18px;
+
+            color: #4b5563;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* =================================
+           MOBILE
+           ================================= */
+
+        @media (max-width: 650px) {
+
+            .tool-page {
+
+                padding:
+                    50px 0 70px;
+            }
+
+            .checklist-box {
+
+                padding: 22px;
+            }
+
+            .category {
+
+                padding: 18px;
+            }
+
+            .button-row {
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     HEADER
+     ================================= -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span>YT</span>BoostKit
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#tools">
+                Tools
+            </a>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <a href="../index.html#tools"
+           class="nav-button">
+
+            All Tools
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =================================
+     MAIN
+     ================================= -->
+
+<main>
+
+<section class="tool-page">
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="tool-header">
+
+            <span class="label">
+                FREE YOUTUBE TOOL
+            </span>
+
+
+            <h1>
+                YouTube SEO Checklist
+            </h1>
+
+
+            <p>
+                Check the important parts of your
+                YouTube video before publishing.
+            </p>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CHECKLIST -->
+
+        <div class="checklist-box">
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-section">
+
+                <div class="progress-top">
+
+                    <span class="progress-label">
+                        SEO Checklist Progress
+                    </span>
+
+                    <span
+                        class="score"
+                        id="score">
+
+                        0%
+
+                    </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <div class="category">
+
+                <h2>
+                    🎯 Title
+                </h2>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check1"
+                        onchange="updateProgress()">
+
+                    <label for="check1">
+                        The title clearly describes the video.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check2"
+                        onchange="updateProgress()">
+
+                    <label for="check2">
+                        The main topic or keyword is naturally included.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check3"
+                        onchange="updateProgress()">
+
+                    <label for="check3">
+                        The title is concise and easy to understand.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check4"
+                        onchange="updateProgress()">
+
+                    <label for="check4">
+                        The title does not make misleading claims.
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="category">
+
+                <h2>
+                    📝 Description
+                </h2>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check5"
+                        onchange="updateProgress()">
+
+                    <label for="check5">
+                        The description accurately explains the video.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check6"
+                        onchange="updateProgress()">
+
+                    <label for="check6">
+                        Important information appears near the beginning.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check7"
+                        onchange="updateProgress()">
+
+                    <label for="check7">
+                        Relevant links or resources are included when needed.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check8"
+                        onchange="updateProgress()">
+
+                    <label for="check8">
+                        Keywords are used naturally without keyword stuffing.
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- KEYWORDS -->
+
+            <div class="category">
+
+                <h2>
+                    🔑 Keywords & Tags
+                </h2>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check9"
+                        onchange="updateProgress()">
+
+                    <label for="check9">
+                        The selected keywords are relevant to the video.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check10"
+                        onchange="updateProgress()">
+
+                    <label for="check10">
+                        Relevant video tags have been added when useful.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check11"
+                        onchange="updateProgress()">
+
+                    <label for="check11">
+                        Unrelated or misleading keywords have been avoided.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check12"
+                        onchange="updateProgress()">
+
+                    <label for="check12">
+                        Hashtags, if used, are relevant to the content.
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- THUMBNAIL -->
+
+            <div class="category">
+
+                <h2>
+                    🖼️ Thumbnail
+                </h2>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check13"
+                        onchange="updateProgress()">
+
+                    <label for="check13">
+                        The thumbnail clearly communicates the video topic.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check14"
+                        onchange="updateProgress()">
+
+                    <label for="check14">
+                        Important elements are easy to see on mobile.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check15"
+                        onchange="updateProgress()">
+
+                    <label for="check15">
+                        Thumbnail text, if used, is easy to read.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check16"
+                        onchange="updateProgress()">
+
+                    <label for="check16">
+                        The thumbnail accurately represents the video.
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- VIDEO -->
+
+            <div class="category">
+
+                <h2>
+                    🎬 Video
+                </h2>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check17"
+                        onchange="updateProgress()">
+
+                    <label for="check17">
+                        The opening quickly establishes what viewers will get.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check18"
+                        onchange="updateProgress()">
+
+                    <label for="check18">
+                        The video provides genuine value to the target audience.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check19"
+                        onchange="updateProgress()">
+
+                    <label for="check19">
+                        Audio and visuals are clear enough for viewers.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check20"
+                        onchange="updateProgress()">
+
+                    <label for="check20">
+                        The content matches the promise made by the title and thumbnail.
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- PUBLISHING -->
+
+            <div class="category">
+
+                <h2>
+                    🚀 Publishing
+                </h2>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check21"
+                        onchange="updateProgress()">
+
+                    <label for="check21">
+                        The correct audience and visibility settings are selected.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check22"
+                        onchange="updateProgress()">
+
+                    <label for="check22">
+                        The selected category and other details are accurate.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check23"
+                        onchange="updateProgress()">
+
+                    <label for="check23">
+                        End screens, cards or playlists are added when appropriate.
+                    </label>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <input
+                        type="checkbox"
+                        id="check24"
+                        onchange="updateProgress()">
+
+                    <label for="check24">
+                        The video follows YouTube's applicable policies and guidelines.
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                class="result-message"
+                id="resultMessage">
+
+                Start checking the items above to calculate
+                your checklist progress.
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <div class="button-row">
+
+                <button
+                    class="reset-btn"
+                    onclick="resetChecklist()">
+
+                    Reset Checklist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content-section">
+
+
+            <h2>
+                What Is a YouTube SEO Checklist?
+            </h2>
+
+
+            <p>
+                A YouTube SEO checklist is a simple way
+                to review important elements of a video
+                before publishing it. It can help creators
+                avoid missing basic optimization steps.
+            </p>
+
+
+            <h2>
+                Does a Checklist Guarantee Rankings?
+            </h2>
+
+
+            <p>
+                No. Completing every item does not
+                guarantee views, rankings or viral
+                performance. YouTube discovery depends
+                on many factors, including the content,
+                audience response and viewer satisfaction.
+            </p>
+
+
+            <h2>
+                Why Use This Checklist?
+            </h2>
+
+
+            <p>
+                Use it as a final pre-publish review.
+                Check each item that applies to your
+                video and use the progress score to see
+                what still needs attention.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =================================
+     FOOTER
+     ================================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <div class="footer-logo">
+
+                <span>YT</span>BoostKit
+
+            </div>
+
+            <p>
+                Free tools for smarter YouTube growth.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Tools
+            </h4>
+
+            <a href="ctr.html">
+                CTR Calculator
+            </a>
+
+            <a href="watch-time.html">
+                Watch Time
+            </a>
+
+            <a href="engagement.html">
+                Engagement
+            </a>
+
+            <a href="subscriber.html">
+                Subscriber Growth
+            </a>
+
+            <a href="title-analyzer.html">
+                Title Analyzer
+            </a>
+
+            <a href="description-generator.html">
+                Description Generator
+            </a>
+
+            <a href="hashtag-generator.html">
+                Hashtag Generator
+            </a>
+
+            <a href="tag-generator.html">
+                Tag Generator
+            </a>
+
+            <a href="keyword-generator.html">
+                Keyword Generator
+            </a>
+
+            <a href="video-idea-generator.html">
+                Video Idea Generator
+            </a>
+
+            <a href="seo-checklist.html">
+                SEO Checklist
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Resources
+            </h4>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Legal
+            </h4>
+
+            <a href="../privacy.html">
+                Privacy Policy
+            </a>
+
+            <a href="../terms.html">
+                Terms
+            </a>
+
+            <a href="../disclaimer.html">
+                Disclaimer
+            </a>
+			<a href="../about.html">
+				About
+			</a>
+			<a href="../contact.html">
+				Contact
+			</a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 YTBoostKit. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- =================================
+     JAVASCRIPT
+     ================================= -->
+
+<script>
+
+
+    /* =================================
+       TOTAL CHECKS
+       ================================= */
+
+    const totalChecks = 24;
+
+
+    /* =================================
+       UPDATE PROGRESS
+       ================================= */
+
+    function updateProgress() {
+
+
+        let completed = 0;
+
+
+        for (
+            let i = 1;
+            i <= totalChecks;
+            i++
+        ) {
+
+
+            const checkbox =
+                document.getElementById(
+                    "check" + i
+                );
+
+
+            if (checkbox.checked) {
+
+                completed++;
+
+            }
+
+        }
+
+
+        const percentage =
+            Math.round(
+                (completed / totalChecks) * 100
+            );
+
+
+        /* =================================
+           SCORE
+           ================================= */
+
+        document.getElementById(
+            "score"
+        ).textContent =
+            percentage + "%";
+
+
+        /* =================================
+           PROGRESS BAR
+           ================================= */
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            percentage + "%";
+
+
+        /* =================================
+           MESSAGE
+           ================================= */
+
+        const message =
+            document.getElementById(
+                "resultMessage"
+            );
+
+
+        if (percentage === 0) {
+
+            message.textContent =
+                "Start checking the items above to calculate your checklist progress.";
+
+        }
+
+        else if (percentage < 40) {
+
+            message.textContent =
+                "You have a good starting point, but several important items still need attention.";
+
+        }
+
+        else if (percentage < 70) {
+
+            message.textContent =
+                "You're making progress. Review the remaining unchecked items before publishing.";
+
+        }
+
+        else if (percentage < 90) {
+
+            message.textContent =
+                "Almost there! Review the remaining items and make sure they genuinely apply to your video.";
+
+        }
+
+        else if (percentage < 100) {
+
+            message.textContent =
+                "Great progress! Only a few checklist items remain.";
+
+        }
+
+        else {
+
+            message.textContent =
+                "🎉 Checklist complete! Your video has passed this pre-publish review. Remember, completing the checklist does not guarantee views or rankings.";
+
+        }
+
+
+        /* =================================
+           SAVE
+           ================================= */
+
+        saveChecklist();
+
+    }
+
+
+
+    /* =================================
+       SAVE CHECKLIST
+       ================================= */
+
+    function saveChecklist() {
+
+
+        const state = {};
+
+
+        for (
+            let i = 1;
+            i <= totalChecks;
+            i++
+        ) {
+
+            state[
+                "check" + i
+            ] =
+                document.getElementById(
+                    "check" + i
+                ).checked;
+
+        }
+
+
+        localStorage.setItem(
+            "ytboostkitSeoChecklist",
+            JSON.stringify(state)
+        );
+
+    }
+
+
+
+    /* =================================
+       LOAD CHECKLIST
+       ================================= */
+
+    function loadChecklist() {
+
+
+        const saved =
+            localStorage.getItem(
+                "ytboostkitSeoChecklist"
+            );
+
+
+        if (!saved) {
+
+            return;
+
+        }
+
+
+        try {
+
+
+            const state =
+                JSON.parse(saved);
+
+
+            for (
+                let i = 1;
+                i <= totalChecks;
+                i++
+            ) {
+
+
+                if (
+                    state[
+                        "check" + i
+                    ] === true
+                ) {
+
+                    document.getElementById(
+                        "check" + i
+                    ).checked = true;
+
+                }
+
+            }
+
+
+            updateProgress();
+
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Could not load saved checklist."
+            );
+
+        }
+
+    }
+
+
+
+    /* =================================
+       RESET
+       ================================= */
+
+    function resetChecklist() {
+
+
+        const confirmed =
+            confirm(
+                "Reset your entire SEO checklist?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        for (
+            let i = 1;
+            i <= totalChecks;
+            i++
+        ) {
+
+            document.getElementById(
+                "check" + i
+            ).checked = false;
+
+        }
+
+
+        localStorage.removeItem(
+            "ytboostkitSeoChecklist"
+        );
+
+
+        updateProgress();
+
+    }
+
+
+
+    /* =================================
+       LOAD ON PAGE
+       ================================= */
+
+    window.addEventListener(
+        "DOMContentLoaded",
+        loadChecklist
+    );
+
+</script>
+
+
+</body>
+
+</html>
