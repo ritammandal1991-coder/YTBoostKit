@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Free YouTube Title Analyzer. Analyze title length, keywords, curiosity, power words and formatting.">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <title>YouTube Title Analyzer - YTBoostKit</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+    <style>
+
+        /* =================================
+           TOOL PAGE
+           ================================= */
+
+        .tool-page {
+            padding: 70px 0 90px;
+        }
+
+
+        .tool-header {
+            max-width: 760px;
+
+            margin: 0 auto 40px;
+
+            text-align: center;
+        }
+
+
+        .tool-header .label {
+
+            color: #635bff;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+        }
+
+
+        .tool-header h1 {
+
+            margin-top: 12px;
+
+            font-size:
+                clamp(34px, 5vw, 52px);
+
+            line-height: 1.1;
+
+            letter-spacing: -1.5px;
+
+        }
+
+
+        .tool-header p {
+
+            margin-top: 18px;
+
+            color: #6b7280;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+        }
+
+
+        /* =================================
+           ANALYZER
+           ================================= */
+
+        .analyzer {
+
+            max-width: 760px;
+
+            margin: 0 auto;
+
+            padding: 35px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.06);
+
+        }
+
+
+        /* =================================
+           INPUT
+           ================================= */
+
+        .input-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        .title-input {
+
+            width: 100%;
+
+            min-height: 120px;
+
+            padding: 15px;
+
+            resize: vertical;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .title-input:focus {
+
+            border-color: #635bff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99, 91, 255, 0.1);
+
+        }
+
+
+        .character-count {
+
+            margin-top: 7px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+            text-align: right;
+
+        }
+
+
+        /* =================================
+           BUTTONS
+           ================================= */
+
+        .button-row {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .analyze-btn,
+        .reset-btn {
+
+            flex: 1;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+
+        .analyze-btn {
+
+            background: #635bff;
+
+            color: white;
+
+        }
+
+
+        .analyze-btn:hover {
+
+            background: #5148e8;
+
+        }
+
+
+        .reset-btn {
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+        }
+
+
+        .reset-btn:hover {
+
+            background: #e5e7eb;
+
+        }
+
+
+        /* =================================
+           SCORE
+           ================================= */
+
+        .result {
+
+            display: none;
+
+            margin-top: 30px;
+
+        }
+
+
+        .result.show {
+
+            display: block;
+
+        }
+
+
+        .score-card {
+
+            padding: 30px;
+
+            background: #f5f3ff;
+
+            border-radius: 16px;
+
+            text-align: center;
+
+        }
+
+
+        .score-label {
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .score {
+
+            margin-top: 5px;
+
+            color: #635bff;
+
+            font-size: 54px;
+
+            font-weight: 900;
+
+        }
+
+
+        .score-status {
+
+            margin-top: 5px;
+
+            color: #4b5563;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =================================
+           CHECKS
+           ================================= */
+
+        .checks {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .check {
+
+            padding: 18px;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+        }
+
+
+        .check-title {
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+        }
+
+
+        .check-result {
+
+            margin-top: 6px;
+
+            color: #4b5563;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =================================
+           SUGGESTION
+           ================================= */
+
+        .suggestion {
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: #f9fafb;
+
+            border-left: 4px solid #635bff;
+
+            border-radius: 8px;
+
+            color: #4b5563;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =================================
+           CONTENT
+           ================================= */
+
+        .content-section {
+
+            max-width: 800px;
+
+            margin: 70px auto 0;
+
+        }
+
+
+        .content-section h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+
+        }
+
+
+        .content-section p {
+
+            margin-bottom: 18px;
+
+            color: #4b5563;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =================================
+           MOBILE
+           ================================= */
+
+        @media (max-width: 650px) {
+
+            .tool-page {
+
+                padding:
+                    50px 0 70px;
+
+            }
+
+
+            .analyzer {
+
+                padding: 24px;
+
+            }
+
+
+            .button-row {
+
+                flex-direction: column;
+
+            }
+
+
+            .checks {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .score {
+
+                font-size: 46px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     HEADER
+     ================================= -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span>YT</span>BoostKit
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#tools">
+                Tools
+            </a>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <a href="../index.html#tools"
+           class="nav-button">
+
+            All Tools
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =================================
+     MAIN
+     ================================= -->
+
+<main>
+
+<section class="tool-page">
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="tool-header">
+
+            <span class="label">
+                FREE YOUTUBE TOOL
+            </span>
+
+
+            <h1>
+                YouTube Title Analyzer
+            </h1>
+
+
+            <p>
+                Analyze your YouTube title for length,
+                keywords, curiosity, power words and
+                formatting.
+            </p>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- ANALYZER -->
+
+        <div class="analyzer">
+
+
+            <div class="input-group">
+
+                <label for="titleInput">
+                    Enter Your YouTube Title
+                </label>
+
+
+                <textarea
+                    id="titleInput"
+                    class="title-input"
+                    placeholder="Example: 10 Amazing Gardening Tips That Will Transform Your Garden"
+                    maxlength="150"
+                    oninput="updateCharacterCount()"></textarea>
+
+
+                <div
+                    class="character-count"
+                    id="characterCount">
+
+                    0 / 150 characters
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-row">
+
+                <button
+                    class="analyze-btn"
+                    onclick="analyzeTitle()">
+
+                    Analyze Title
+
+                </button>
+
+
+                <button
+                    class="reset-btn"
+                    onclick="resetAnalyzer()">
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result">
+
+
+                <!-- SCORE -->
+
+                <div class="score-card">
+
+                    <div class="score-label">
+                        TITLE SCORE
+                    </div>
+
+
+                    <div
+                        class="score"
+                        id="score">
+
+                        0 / 100
+
+                    </div>
+
+
+                    <div
+                        class="score-status"
+                        id="scoreStatus">
+
+                    </div>
+
+                </div>
+
+
+                <!-- CHECKS -->
+
+                <div class="checks">
+
+
+                    <div class="check">
+
+                        <div class="check-title">
+                            📏 Title Length
+                        </div>
+
+                        <div
+                            class="check-result"
+                            id="lengthResult">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="check">
+
+                        <div class="check-title">
+                            🔑 Keyword
+                        </div>
+
+                        <div
+                            class="check-result"
+                            id="keywordResult">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="check">
+
+                        <div class="check-title">
+                            🔢 Number
+                        </div>
+
+                        <div
+                            class="check-result"
+                            id="numberResult">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="check">
+
+                        <div class="check-title">
+                            ❓ Curiosity
+                        </div>
+
+                        <div
+                            class="check-result"
+                            id="curiosityResult">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="check">
+
+                        <div class="check-title">
+                            ⚡ Power Words
+                        </div>
+
+                        <div
+                            class="check-result"
+                            id="powerResult">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="check">
+
+                        <div class="check-title">
+                            📝 Formatting
+                        </div>
+
+                        <div
+                            class="check-result"
+                            id="formatResult">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUGGESTION -->
+
+                <div
+                    class="suggestion"
+                    id="suggestion">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content-section">
+
+
+            <h2>
+                Why Does a YouTube Title Matter?
+            </h2>
+
+
+            <p>
+                A YouTube title helps viewers understand
+                what a video is about before they decide
+                whether to watch it. A clear and relevant
+                title can work together with the thumbnail
+                to communicate the video's topic and value.
+            </p>
+
+
+            <h2>
+                What Does This Analyzer Check?
+            </h2>
+
+
+            <p>
+                YTBoostKit checks basic title characteristics
+                such as length, numbers, question words,
+                selected power words and excessive formatting.
+                The score is a guideline rather than a guarantee
+                of video performance.
+            </p>
+
+
+            <h2>
+                Important Note
+            </h2>
+
+
+            <p>
+                No title analyzer can guarantee views,
+                impressions or click-through rate. Actual
+                performance depends on many factors including
+                the topic, audience, thumbnail, competition
+                and viewer behavior.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =================================
+     FOOTER
+     ================================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <div class="footer-logo">
+
+                <span>YT</span>BoostKit
+
+            </div>
+
+            <p>
+                Free tools for smarter YouTube growth.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Tools
+            </h4>
+
+            <a href="ctr.html">
+                CTR Calculator
+            </a>
+
+            <a href="watch-time.html">
+                Watch Time
+            </a>
+
+            <a href="engagement.html">
+                Engagement
+            </a>
+
+            <a href="subscriber.html">
+                Subscriber Growth
+            </a>
+
+            <a href="title-analyzer.html">
+                Title Analyzer
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Resources
+            </h4>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Legal
+            </h4>
+
+            <a href="../privacy.html">
+                Privacy Policy
+            </a>
+
+            <a href="../terms.html">
+                Terms
+            </a>
+
+            <a href="../disclaimer.html">
+                Disclaimer
+            </a>
+			<a href="../about.html">
+				About
+			</a>
+			<a href="../contact.html">
+				Contact
+			</a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 YTBoostKit. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- =================================
+     JAVASCRIPT
+     ================================= -->
+
+<script>
+
+
+    /* =================================
+       CHARACTER COUNT
+       ================================= */
+
+    function updateCharacterCount() {
+
+        const title =
+            document.getElementById(
+                "titleInput"
+            ).value;
+
+
+        document.getElementById(
+            "characterCount"
+        ).textContent =
+            title.length +
+            " / 150 characters";
+
+    }
+
+
+
+    /* =================================
+       ANALYZE TITLE
+       ================================= */
+
+    function analyzeTitle() {
+
+
+        const title =
+            document.getElementById(
+                "titleInput"
+            ).value.trim();
+
+
+        if (!title) {
+
+            alert(
+                "Please enter a YouTube title."
+            );
+
+            return;
+
+        }
+
+
+        const lowerTitle =
+            title.toLowerCase();
+
+
+        let score = 0;
+
+
+        /* =================================
+           1. TITLE LENGTH
+           ================================= */
+
+        let lengthText;
+
+
+        if (
+            title.length >= 40 &&
+            title.length <= 70
+        ) {
+
+            score += 20;
+
+            lengthText =
+                "✅ Good length for readability.";
+
+        } else if (
+            title.length >= 25 &&
+            title.length <= 90
+        ) {
+
+            score += 15;
+
+            lengthText =
+                "🟡 Acceptable length.";
+
+        } else {
+
+            score += 7;
+
+            lengthText =
+                "⚠️ Consider making the title more concise.";
+
+        }
+
+		document.getElementById(
+				"lengthResult"
+		).textContent =
+		lengthText + " (" + title.length + " characters)";
+
+        /* =================================
+           2. KEYWORD
+           ================================= */
+
+        const keywordWords = [
+
+            "youtube",
+            "video",
+            "how",
+            "guide",
+            "tips",
+            "tutorial",
+            "best",
+            "review",
+            "learn",
+            "grow",
+            "gaming",
+            "garden",
+            "gardening",
+            "ai",
+            "shorts",
+            "seo"
+
+        ];
+
+
+        let hasKeyword = false;
+
+
+        for (
+            let i = 0;
+            i < keywordWords.length;
+            i++
+        ) {
+
+            if (
+                lowerTitle.includes(
+                    keywordWords[i]
+                )
+            ) {
+
+                hasKeyword = true;
+
+                break;
+
+            }
+
+        }
+
+
+        if (hasKeyword) {
+
+            score += 20;
+
+            document.getElementById(
+                "keywordResult"
+            ).textContent =
+                "✅ Relevant topic keyword detected.";
+
+        } else {
+
+            score += 8;
+
+            document.getElementById(
+                "keywordResult"
+            ).textContent =
+                "⚠️ Consider including a clear topic keyword.";
+
+        }
+
+
+        /* =================================
+           3. NUMBER
+           ================================= */
+
+        const hasNumber =
+            /\d/.test(title);
+
+
+        if (hasNumber) {
+
+            score += 15;
+
+            document.getElementById(
+                "numberResult"
+            ).textContent =
+                "✅ A number is included.";
+
+        } else {
+
+            score += 8;
+
+            document.getElementById(
+                "numberResult"
+            ).textContent =
+                "🟡 No number detected. Numbers can help some title formats.";
+
+        }
+
+
+        /* =================================
+           4. CURIOSITY
+           ================================= */
+
+        const curiosityWords = [
+
+            "how",
+            "why",
+            "what",
+            "secret",
+            "mistake",
+            "before",
+            "never",
+            "revealed",
+            "surprising",
+            "actually",
+            "really",
+            "happen",
+            "happens"
+
+        ];
+
+
+        let hasCuriosity = false;
+
+
+        for (
+            let i = 0;
+            i < curiosityWords.length;
+            i++
+        ) {
+
+            if (
+                lowerTitle.includes(
+                    curiosityWords[i]
+                )
+            ) {
+
+                hasCuriosity = true;
+
+                break;
+
+            }
+
+        }
+
+
+        if (
+            hasCuriosity ||
+            title.includes("?")
+        ) {
+
+            score += 15;
+
+            document.getElementById(
+                "curiosityResult"
+            ).textContent =
+                "✅ Curiosity element detected.";
+
+        } else {
+
+            score += 7;
+
+            document.getElementById(
+                "curiosityResult"
+            ).textContent =
+                "🟡 Consider adding a clear curiosity or benefit.";
+
+        }
+
+
+        /* =================================
+           5. POWER WORDS
+           ================================= */
+
+        const powerWords = [
+
+            "amazing",
+            "ultimate",
+            "powerful",
+            "easy",
+            "simple",
+            "secret",
+            "best",
+            "proven",
+            "important",
+            "incredible",
+            "essential",
+            "fast",
+            "smart",
+            "free"
+
+        ];
+
+
+        let hasPowerWord = false;
+
+
+        for (
+            let i = 0;
+            i < powerWords.length;
+            i++
+        ) {
+
+            if (
+                lowerTitle.includes(
+                    powerWords[i]
+                )
+            ) {
+
+                hasPowerWord = true;
+
+                break;
+
+            }
+
+        }
+
+
+        if (hasPowerWord) {
+
+            score += 15;
+
+            document.getElementById(
+                "powerResult"
+            ).textContent =
+                "✅ Strong descriptive word detected.";
+
+        } else {
+
+            score += 7;
+
+            document.getElementById(
+                "powerResult"
+            ).textContent =
+                "🟡 Consider using a clear benefit-focused word.";
+
+        }
+
+
+        /* =================================
+           6. FORMATTING
+           ================================= */
+
+        const upperLetters =
+            title.replace(
+                /[^A-Z]/g,
+                ""
+            ).length;
+
+
+        const lowerLetters =
+            title.replace(
+                /[^a-z]/g,
+                ""
+            ).length;
+
+
+        const totalLetters =
+            upperLetters +
+            lowerLetters;
+
+
+        const upperRatio =
+            totalLetters > 0
+                ? upperLetters /
+                  totalLetters
+                : 0;
+
+
+        const excessivePunctuation =
+            /[!?]{3,}/.test(title);
+
+
+        if (
+            upperRatio < 0.5 &&
+            !excessivePunctuation
+        ) {
+
+            score += 15;
+
+            document.getElementById(
+                "formatResult"
+            ).textContent =
+                "✅ Formatting looks clean.";
+
+        } else {
+
+            score += 5;
+
+            document.getElementById(
+                "formatResult"
+            ).textContent =
+                "⚠️ Avoid excessive ALL CAPS or punctuation.";
+
+        }
+
+
+        /* =================================
+           FINAL SCORE
+           ================================= */
+
+        if (score > 100) {
+
+            score = 100;
+
+        }
+
+
+        document.getElementById(
+            "score"
+        ).textContent =
+            score +
+            " / 100";
+
+
+        /* =================================
+           SCORE STATUS
+           ================================= */
+
+        let status;
+
+
+        if (score >= 85) {
+
+            status =
+                "Excellent title structure.";
+
+        } else if (score >= 70) {
+
+            status =
+                "Good title with room for improvement.";
+
+        } else if (score >= 50) {
+
+            status =
+                "Average title. Consider improving clarity and curiosity.";
+
+        } else {
+
+            status =
+                "Needs improvement.";
+
+        }
+
+
+        document.getElementById(
+            "scoreStatus"
+        ).textContent =
+            status;
+
+
+        /* =================================
+           SUGGESTION
+           ================================= */
+
+        let suggestion =
+            "💡 Tip: Keep your title clear, relevant and focused on the viewer's reason to watch.";
+
+
+        if (title.length < 25) {
+
+            suggestion =
+                "💡 Your title is quite short. Consider adding useful context or a clear benefit.";
+
+        }
+
+
+        if (title.length > 90) {
+
+            suggestion =
+                "💡 Your title is long. Try removing unnecessary words while keeping the main idea.";
+
+        }
+
+
+        if (!hasKeyword) {
+
+            suggestion =
+                "💡 Consider adding a clear keyword that accurately describes the video's topic.";
+
+        }
+
+
+        document.getElementById(
+            "suggestion"
+        ).textContent =
+            suggestion;
+
+
+        /* =================================
+           SHOW RESULT
+           ================================= */
+
+        document.getElementById(
+            "result"
+        ).classList.add("show");
+
+
+        /* =================================
+           SCROLL
+           ================================= */
+
+        document.getElementById(
+            "result"
+        ).scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+
+    /* =================================
+       RESET
+       ================================= */
+
+    function resetAnalyzer() {
+
+
+        document.getElementById(
+            "titleInput"
+        ).value = "";
+
+
+        document.getElementById(
+            "characterCount"
+        ).textContent =
+            "0 / 150 characters";
+
+
+        document.getElementById(
+            "result"
+        ).classList.remove("show");
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

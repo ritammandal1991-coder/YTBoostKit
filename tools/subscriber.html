@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Free YouTube Subscriber Growth Calculator. Estimate future subscribers based on current subscribers and average daily growth.">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <title>YouTube Subscriber Growth Calculator - YTBoostKit</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* =================================
+           TOOL PAGE
+           ================================= */
+
+        .tool-page {
+            padding: 70px 0 90px;
+        }
+
+        .tool-header {
+            max-width: 760px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .tool-header .label {
+            color: #635bff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .tool-header h1 {
+            margin-top: 12px;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .tool-header p {
+            margin-top: 18px;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* =================================
+           CALCULATOR
+           ================================= */
+
+        .calculator {
+            max-width: 620px;
+            margin: 0 auto;
+
+            padding: 35px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* =================================
+           INPUTS
+           ================================= */
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            height: 52px;
+
+            padding: 0 15px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .input-group input:focus {
+            border-color: #635bff;
+
+            box-shadow:
+                0 0 0 4px rgba(99, 91, 255, 0.1);
+        }
+
+        .input-help {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+        }
+
+
+        /* =================================
+           BUTTONS
+           ================================= */
+
+        .button-row {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 10px;
+        }
+
+        .calculate-btn,
+        .reset-btn {
+            flex: 1;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .calculate-btn {
+            background: #635bff;
+
+            color: white;
+        }
+
+        .calculate-btn:hover {
+            background: #5148e8;
+        }
+
+        .reset-btn {
+            background: #f3f4f6;
+
+            color: #374151;
+        }
+
+        .reset-btn:hover {
+            background: #e5e7eb;
+        }
+
+
+        /* =================================
+           RESULT
+           ================================= */
+
+        .result {
+            display: none;
+
+            margin-top: 28px;
+
+            padding: 28px;
+
+            border-radius: 16px;
+
+            background: #f5f3ff;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-title {
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* RESULT GRID */
+
+        .result-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .result-box {
+            padding: 20px;
+
+            background: #ffffff;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            border: 1px solid #e5e7eb;
+        }
+
+        .result-box span {
+            display: block;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        .result-box strong {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #635bff;
+
+            font-size: 24px;
+
+            font-weight: 900;
+        }
+
+
+        /* =================================
+           GROWTH MESSAGE
+           ================================= */
+
+        .growth-message {
+            margin-top: 18px;
+
+            text-align: center;
+
+            color: #4b5563;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =================================
+           CONTENT
+           ================================= */
+
+        .content-section {
+            max-width: 800px;
+
+            margin: 70px auto 0;
+        }
+
+        .content-section h2 {
+            margin-bottom: 15px;
+
+            font-size: 28px;
+        }
+
+        .content-section p {
+            margin-bottom: 18px;
+
+            color: #4b5563;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+        .formula {
+            margin: 25px 0;
+
+            padding: 20px;
+
+            background: #f9fafb;
+
+            border-left: 4px solid #635bff;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            overflow-x: auto;
+        }
+
+
+        /* =================================
+           MOBILE
+           ================================= */
+
+        @media (max-width: 650px) {
+
+            .tool-page {
+                padding: 50px 0 70px;
+            }
+
+            .calculator {
+                padding: 24px;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     HEADER
+     ================================= -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span>YT</span>BoostKit
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#tools">
+                Tools
+            </a>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <a href="../index.html#tools"
+           class="nav-button">
+
+            All Tools
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =================================
+     MAIN
+     ================================= -->
+
+<main>
+
+<section class="tool-page">
+
+
+    <div class="container">
+
+
+        <!-- TOOL HEADER -->
+
+        <div class="tool-header">
+
+            <span class="label">
+                FREE YOUTUBE TOOL
+            </span>
+
+            <h1>
+                YouTube Subscriber Growth Calculator
+            </h1>
+
+            <p>
+                Estimate your future subscriber count using
+                your current subscribers and average daily growth.
+            </p>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CALCULATOR -->
+
+        <div class="calculator">
+
+
+            <!-- CURRENT SUBSCRIBERS -->
+
+            <div class="input-group">
+
+                <label for="currentSubscribers">
+                    Current Subscribers
+                </label>
+
+                <input
+                    type="number"
+                    id="currentSubscribers"
+                    placeholder="Example: 10000"
+                    min="0"
+                >
+
+            </div>
+
+
+            <!-- DAILY GROWTH -->
+
+            <div class="input-group">
+
+                <label for="dailyGrowth">
+                    Average New Subscribers Per Day
+                </label>
+
+                <input
+                    type="number"
+                    id="dailyGrowth"
+                    placeholder="Example: 100"
+                    min="0"
+                    step="0.01"
+                >
+
+                <span class="input-help">
+                    Use your recent average daily subscriber growth.
+                </span>
+
+            </div>
+
+
+            <!-- DAYS -->
+
+            <div class="input-group">
+
+                <label for="days">
+                    Projection Period — Days
+                </label>
+
+                <input
+                    type="number"
+                    id="days"
+                    placeholder="Example: 30"
+                    min="1"
+                    step="1"
+                >
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-row">
+
+                <button
+                    class="calculate-btn"
+                    onclick="calculateSubscribers()">
+
+                    Calculate Growth
+
+                </button>
+
+
+                <button
+                    class="reset-btn"
+                    onclick="resetSubscribers()">
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result">
+
+
+                <div class="result-title">
+                    ESTIMATED SUBSCRIBER GROWTH
+                </div>
+
+
+                <div class="result-grid">
+
+
+                    <div class="result-box">
+
+                        <span>
+                            NEW SUBSCRIBERS
+                        </span>
+
+                        <strong
+                            id="newSubscribers">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <span>
+                            ESTIMATED TOTAL
+                        </span>
+
+                        <strong
+                            id="totalSubscribers">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <span>
+                            GROWTH
+                        </span>
+
+                        <strong
+                            id="growthPercentage">
+
+                            0%
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <span>
+                            DAILY AVERAGE
+                        </span>
+
+                        <strong
+                            id="dailyAverage">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="growth-message"
+                    id="growthMessage">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content-section">
+
+
+            <h2>
+                What is Subscriber Growth?
+            </h2>
+
+            <p>
+                Subscriber growth shows how the number of
+                subscribers on a YouTube channel changes over
+                time. This calculator uses a simple average-based
+                projection to estimate a future subscriber count.
+            </p>
+
+
+            <h2>
+                Subscriber Growth Formula
+            </h2>
+
+            <div class="formula">
+
+                New Subscribers =
+                Average Daily Subscribers × Number of Days
+
+                <br><br>
+
+                Estimated Total =
+                Current Subscribers + New Subscribers
+
+            </div>
+
+
+            <h2>
+                Example
+            </h2>
+
+            <p>
+                If a channel currently has 10,000 subscribers
+                and gains an average of 100 subscribers per day,
+                the estimated additional subscribers over 30 days
+                would be 3,000. The projected total would therefore
+                be 13,000 subscribers.
+            </p>
+
+
+            <h2>
+                Important Note
+            </h2>
+
+            <p>
+                This is a simple projection, not a prediction.
+                Actual subscriber growth can change significantly
+                because of content performance, audience behavior,
+                seasonality, traffic sources and other factors.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =================================
+     FOOTER
+     ================================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <div class="footer-logo">
+
+                <span>YT</span>BoostKit
+
+            </div>
+
+            <p>
+                Free tools for smarter YouTube growth.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Tools
+            </h4>
+
+            <a href="ctr.html">
+                CTR Calculator
+            </a>
+
+            <a href="watch-time.html">
+                Watch Time
+            </a>
+
+            <a href="engagement.html">
+                Engagement
+            </a>
+
+            <a href="subscriber.html">
+                Subscriber Growth
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Resources
+            </h4>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Legal
+            </h4>
+
+            <a href="../privacy.html">
+                Privacy Policy
+            </a>
+
+            <a href="../terms.html">
+                Terms
+            </a>
+
+            <a href="../disclaimer.html">
+                Disclaimer
+            </a>
+			<a href="../about.html">
+				About
+			</a>
+			<a href="../contact.html">
+				Contact
+			</a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 YTBoostKit. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- =================================
+     JAVASCRIPT
+     ================================= -->
+
+<script>
+
+    /* =================================
+       SUBSCRIBER CALCULATOR
+       ================================= */
+
+    function calculateSubscribers() {
+
+
+        const currentSubscribers =
+            Number(
+                document.getElementById(
+                    "currentSubscribers"
+                ).value
+            );
+
+
+        const dailyGrowth =
+            Number(
+                document.getElementById(
+                    "dailyGrowth"
+                ).value
+            );
+
+
+        const days =
+            Number(
+                document.getElementById(
+                    "days"
+                ).value
+            );
+
+
+        /* ===============================
+           VALIDATION
+           =============================== */
+
+        if (
+            currentSubscribers < 0 ||
+            !Number.isFinite(currentSubscribers)
+        ) {
+
+            alert(
+                "Please enter a valid current subscriber count."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            dailyGrowth < 0 ||
+            !Number.isFinite(dailyGrowth)
+        ) {
+
+            alert(
+                "Please enter a valid daily subscriber growth."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !days ||
+            days <= 0 ||
+            !Number.isFinite(days)
+        ) {
+
+            alert(
+                "Please enter a valid projection period."
+            );
+
+            return;
+
+        }
+
+
+        /* ===============================
+           CALCULATION
+           =============================== */
+
+        const newSubscribers =
+            dailyGrowth * days;
+
+
+        const totalSubscribers =
+            currentSubscribers +
+            newSubscribers;
+
+
+        const growthPercentage =
+            currentSubscribers > 0
+                ? (newSubscribers /
+                   currentSubscribers) * 100
+                : 0;
+
+
+        /* ===============================
+           DISPLAY
+           =============================== */
+
+        document.getElementById(
+            "newSubscribers"
+        ).textContent =
+            formatNumber(newSubscribers);
+
+
+        document.getElementById(
+            "totalSubscribers"
+        ).textContent =
+            formatNumber(totalSubscribers);
+
+
+        document.getElementById(
+            "growthPercentage"
+        ).textContent =
+            growthPercentage.toFixed(2) + "%";
+
+
+        document.getElementById(
+            "dailyAverage"
+        ).textContent =
+            formatNumber(dailyGrowth);
+
+
+        /* ===============================
+           MESSAGE
+           =============================== */
+
+        document.getElementById(
+            "growthMessage"
+        ).textContent =
+            "Based on an average of " +
+            formatNumber(dailyGrowth) +
+            " new subscribers per day over " +
+            formatNumber(days) +
+            " days.";
+
+
+        /* ===============================
+           SHOW RESULT
+           =============================== */
+
+        document.getElementById(
+            "result"
+        ).classList.add("show");
+
+    }
+
+
+    /* =================================
+       NUMBER FORMAT
+       ================================= */
+
+    function formatNumber(number) {
+
+        return number.toLocaleString(
+            "en-US",
+            {
+                maximumFractionDigits: 2
+            }
+        );
+
+    }
+
+
+    /* =================================
+       RESET
+       ================================= */
+
+    function resetSubscribers() {
+
+
+        document.getElementById(
+            "currentSubscribers"
+        ).value = "";
+
+
+        document.getElementById(
+            "dailyGrowth"
+        ).value = "";
+
+
+        document.getElementById(
+            "days"
+        ).value = "";
+
+
+        document.getElementById(
+            "result"
+        ).classList.remove("show");
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
