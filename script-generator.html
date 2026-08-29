@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Free YouTube Script Generator. Create video script ideas from your topic, video type and tone.">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <title>YouTube Script Generator - YTBoostKit</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        .tool-page {
+            padding: 70px 0 90px;
+        }
+
+        .tool-header {
+            max-width: 760px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .tool-header .label {
+            color: #635bff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .tool-header h1 {
+            margin-top: 12px;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .tool-header p {
+            margin-top: 18px;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* ===============================
+           GENERATOR
+           =============================== */
+
+        .generator {
+
+            max-width: 850px;
+
+            margin: 0 auto;
+
+            padding: 35px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.06);
+
+        }
+
+
+        /* ===============================
+           INPUTS
+           =============================== */
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #111827;
+
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            background: #ffffff;
+
+        }
+
+        .input-group input,
+        .input-group select {
+
+            height: 52px;
+
+            padding: 0 15px;
+
+        }
+
+        .input-group textarea {
+
+            min-height: 120px;
+
+            padding: 15px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+
+            border-color: #635bff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99, 91, 255, 0.1);
+
+        }
+
+        .input-help {
+
+            display: block;
+
+            margin-top: 7px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+        }
+
+
+        /* ===============================
+           BUTTONS
+           =============================== */
+
+        .button-row {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 10px;
+
+        }
+
+        .generate-btn,
+        .reset-btn {
+
+            flex: 1;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+        .generate-btn {
+
+            background: #635bff;
+
+            color: #ffffff;
+
+        }
+
+        .generate-btn:hover {
+
+            background: #5148e8;
+
+        }
+
+        .reset-btn {
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+        }
+
+        .reset-btn:hover {
+
+            background: #e5e7eb;
+
+        }
+
+
+        /* ===============================
+           RESULT
+           =============================== */
+
+        .result {
+
+            display: none;
+
+            margin-top: 30px;
+
+        }
+
+        .result.show {
+
+            display: block;
+
+        }
+
+        .result-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .result-header h2 {
+
+            margin: 0;
+
+            font-size: 22px;
+
+        }
+
+        .copy-btn {
+
+            border: none;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            padding: 10px 16px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+        .copy-btn:hover {
+
+            background: #e5e7eb;
+
+        }
+
+
+        /* ===============================
+           SCRIPT
+           =============================== */
+
+        .script-output {
+
+            padding: 25px;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            white-space: pre-wrap;
+
+            color: #374151;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+            min-height: 250px;
+
+        }
+
+
+        /* ===============================
+           NOTICE
+           =============================== */
+
+        .notice {
+
+            margin-top: 18px;
+
+            padding: 16px;
+
+            background: #f5f3ff;
+
+            border-left: 4px solid #635bff;
+
+            border-radius: 8px;
+
+            color: #4b5563;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* ===============================
+           CONTENT
+           =============================== */
+
+        .content-section {
+
+            max-width: 850px;
+
+            margin: 70px auto 0;
+
+        }
+
+        .content-section h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+
+        }
+
+        .content-section p {
+
+            margin-bottom: 18px;
+
+            color: #4b5563;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+        }
+
+
+        /* ===============================
+           MOBILE
+           =============================== */
+
+        @media (max-width: 650px) {
+
+            .tool-page {
+
+                padding:
+                    50px 0 70px;
+
+            }
+
+            .generator {
+
+                padding: 24px;
+
+            }
+
+            .button-row {
+
+                flex-direction: column;
+
+            }
+
+            .result-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ===============================
+     HEADER
+     =============================== -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span>YT</span>BoostKit
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#tools">
+                Tools
+            </a>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <a href="../index.html#tools"
+           class="nav-button">
+
+            All Tools
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ===============================
+     MAIN
+     =============================== -->
+
+<main>
+
+<section class="tool-page">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="tool-header">
+
+            <span class="label">
+                FREE YOUTUBE TOOL
+            </span>
+
+
+            <h1>
+                YouTube Script Generator
+            </h1>
+
+
+            <p>
+                Create a simple YouTube video script
+                structure from your topic, video type
+                and preferred tone.
+            </p>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- GENERATOR -->
+
+        <div class="generator">
+
+
+            <!-- TOPIC -->
+
+            <div class="input-group">
+
+                <label for="topic">
+
+                    Video Topic
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="topic"
+                    placeholder="Example: How to grow tomatoes at home"
+                    maxlength="120">
+
+
+                <span class="input-help">
+
+                    Enter the main topic of your video.
+
+                </span>
+
+            </div>
+
+
+            <!-- VIDEO TYPE -->
+
+            <div class="input-group">
+
+                <label for="videoType">
+
+                    Video Type
+
+                </label>
+
+
+                <select id="videoType">
+
+                    <option value="tutorial">
+                        Tutorial / How-To
+                    </option>
+
+                    <option value="review">
+                        Review
+                    </option>
+
+                    <option value="list">
+                        List / Top 10
+                    </option>
+
+                    <option value="educational">
+                        Educational
+                    </option>
+
+                    <option value="story">
+                        Story
+                    </option>
+
+                    <option value="short">
+                        YouTube Short
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TONE -->
+
+            <div class="input-group">
+
+                <label for="tone">
+
+                    Tone
+
+                </label>
+
+
+                <select id="tone">
+
+                    <option value="friendly">
+                        Friendly
+                    </option>
+
+                    <option value="professional">
+                        Professional
+                    </option>
+
+                    <option value="exciting">
+                        Exciting
+                    </option>
+
+                    <option value="educational">
+                        Educational
+                    </option>
+
+                    <option value="storytelling">
+                        Storytelling
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- AUDIENCE -->
+
+            <div class="input-group">
+
+                <label for="audience">
+
+                    Target Audience
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="audience"
+                    placeholder="Example: Beginner gardeners"
+                    maxlength="100">
+
+            </div>
+
+
+            <!-- EXTRA DETAILS -->
+
+            <div class="input-group">
+
+                <label for="details">
+
+                    Extra Details
+                    <span
+                        style="font-weight:400;color:#9ca3af;">
+                        (Optional)
+                    </span>
+
+                </label>
+
+
+                <textarea
+                    id="details"
+                    placeholder="Add key points, products, steps or information you want included."
+                    maxlength="500"></textarea>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-row">
+
+                <button
+                    class="generate-btn"
+                    onclick="generateScript()">
+
+                    Generate Script
+
+                </button>
+
+
+                <button
+                    class="reset-btn"
+                    onclick="resetGenerator()">
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result">
+
+
+                <div class="result-header">
+
+                    <h2>
+                        Your Script
+                    </h2>
+
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyScript()">
+
+                        Copy Script
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="script-output"
+                    id="scriptOutput">
+
+                </div>
+
+
+                <div class="notice">
+
+                    💡 This tool creates a basic script
+                    framework. Review and customize the
+                    information before publishing, especially
+                    for factual or sensitive topics.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content-section">
+
+
+            <h2>
+                Why Use a YouTube Script Generator?
+            </h2>
+
+
+            <p>
+                A structured script can help creators
+                organize their hook, main points, examples
+                and call to action before recording a video.
+            </p>
+
+
+            <h2>
+                Start With a Strong Hook
+            </h2>
+
+
+            <p>
+                The opening seconds are important. Start
+                by clearly showing the viewer what they
+                can expect to learn, discover or experience
+                from the video.
+            </p>
+
+
+            <h2>
+                Customize Your Script
+            </h2>
+
+
+            <p>
+                Generated content should be treated as a
+                starting point. Add your own experience,
+                examples and accurate information to make
+                the final video more useful and authentic.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ===============================
+     FOOTER
+     =============================== -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <div class="footer-logo">
+
+                <span>YT</span>BoostKit
+
+            </div>
+
+            <p>
+                Free tools for smarter YouTube growth.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Tools
+            </h4>
+
+            <a href="ctr.html">
+                CTR Calculator
+            </a>
+
+            <a href="watch-time.html">
+                Watch Time
+            </a>
+
+            <a href="engagement.html">
+                Engagement
+            </a>
+
+            <a href="subscriber.html">
+                Subscriber Growth
+            </a>
+
+            <a href="title-analyzer.html">
+                Title Analyzer
+            </a>
+
+            <a href="title-generator.html">
+                Title Generator
+            </a>
+
+            <a href="description-generator.html">
+                Description Generator
+            </a>
+
+            <a href="hashtag-generator.html">
+                Hashtag Generator
+            </a>
+
+            <a href="tag-generator.html">
+                Tag Generator
+            </a>
+
+            <a href="keyword-generator.html">
+                Keyword Generator
+            </a>
+
+            <a href="video-idea-generator.html">
+                Video Idea Generator
+            </a>
+
+            <a href="seo-checklist.html">
+                SEO Checklist
+            </a>
+
+            <a href="thumbnail-analyzer.html">
+                Thumbnail Analyzer
+            </a>
+
+            <a href="channel-name-generator.html">
+                Channel Name Generator
+            </a>
+
+            <a href="script-generator.html">
+                Script Generator
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Resources
+            </h4>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Legal
+            </h4>
+
+            <a href="../privacy.html">
+                Privacy Policy
+            </a>
+
+            <a href="../terms.html">
+                Terms
+            </a>
+
+            <a href="../disclaimer.html">
+                Disclaimer
+            </a>
+			<a href="../about.html">
+				About
+			</a>
+			<a href="../contact.html">
+				Contact
+			</a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 YTBoostKit. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- ===============================
+     JAVASCRIPT
+     =============================== -->
+
+<script>
+
+
+    /* ===============================
+       GENERATE SCRIPT
+       =============================== */
+
+    function generateScript() {
+
+
+        const topic =
+            document.getElementById(
+                "topic"
+            ).value.trim();
+
+
+        const videoType =
+            document.getElementById(
+                "videoType"
+            ).value;
+
+
+        const tone =
+            document.getElementById(
+                "tone"
+            ).value;
+
+
+        const audience =
+            document.getElementById(
+                "audience"
+            ).value.trim();
+
+
+        const details =
+            document.getElementById(
+                "details"
+            ).value.trim();
+
+
+        if (!topic) {
+
+            alert(
+                "Please enter your video topic."
+            );
+
+            return;
+
+        }
+
+
+        const audienceText =
+            audience ||
+            "your target viewers";
+
+
+        let script = "";
+
+
+        /* ===============================
+           HOOK
+           =============================== */
+
+        script +=
+`HOOK
+
+What if you could learn something useful about "${topic}" without wasting hours searching for the right information?
+
+In this video, I'll show you the key things you need to know about ${topic}.
+
+`;
+
+
+        /* ===============================
+           INTRO
+           =============================== */
+
+        script +=
+`INTRO
+
+Hey everyone, welcome back to YTBoostKit.
+
+If you're interested in ${topic}, you're in the right place.
+
+This video is made for ${audienceText}.
+
+Let's get started.
+
+`;
+
+
+        /* ===============================
+           BODY
+           =============================== */
+
+        if (
+            videoType === "tutorial"
+        ) {
+
+            script +=
+`STEP 1 — GETTING STARTED
+
+First, let's understand the basics of ${topic}.
+
+Explain what viewers need before beginning.
+
+STEP 2 — MAIN PROCESS
+
+Now walk through the main process step by step.
+
+Keep each step clear and demonstrate it visually whenever possible.
+
+STEP 3 — COMMON MISTAKES
+
+Explain the most common mistakes people make and how viewers can avoid them.
+
+STEP 4 — BEST PRACTICES
+
+Share practical tips that can help viewers get better results.
+
+`;
+
+        }
+
+
+        else if (
+            videoType === "review"
+        ) {
+
+            script +=
+`WHAT IS IT?
+
+Start by explaining what ${topic} is and who it is designed for.
+
+KEY FEATURES
+
+Explain the most important features or characteristics.
+
+PROS
+
+Share the strongest advantages.
+
+CONS
+
+Be honest about limitations or disadvantages.
+
+FINAL VERDICT
+
+Explain who may find ${topic} useful and who may want to consider alternatives.
+
+`;
+
+        }
+
+
+        else if (
+            videoType === "list"
+        ) {
+
+            script +=
+`NUMBER 5
+
+Introduce the fifth important point related to ${topic}.
+
+NUMBER 4
+
+Explain why this point matters.
+
+NUMBER 3
+
+Share the details, benefits or example.
+
+NUMBER 2
+
+Give viewers a stronger or more surprising point.
+
+NUMBER 1
+
+Reveal the most important point and explain why it deserves the top position.
+
+`;
+
+        }
+
+
+        else if (
+            videoType === "educational"
+        ) {
+
+            script +=
+`THE BASICS
+
+Start by explaining the fundamental concept behind ${topic}.
+
+KEY FACT #1
+
+Explain the first important fact with a simple example.
+
+KEY FACT #2
+
+Introduce another useful fact or concept.
+
+KEY FACT #3
+
+Explain a practical takeaway viewers can remember.
+
+REAL-WORLD EXAMPLE
+
+Show how this information can be applied in real life.
+
+`;
+
+        }
+
+
+        else if (
+            videoType === "story"
+        ) {
+
+            script +=
+`THE BEGINNING
+
+Introduce the situation and explain why ${topic} became important.
+
+THE PROBLEM
+
+Describe the challenge or conflict.
+
+THE TURNING POINT
+
+Reveal the moment when something changed.
+
+THE LESSON
+
+Explain what can be learned from the experience.
+
+THE END
+
+Finish the story with a memorable conclusion.
+
+`;
+
+        }
+
+
+        else if (
+            videoType === "short"
+        ) {
+
+            script +=
+`0–3 SECONDS — HOOK
+
+Stop scrolling! Here's something you should know about ${topic}.
+
+3–10 SECONDS — SETUP
+
+Quickly explain the problem, question or surprising fact.
+
+10–25 SECONDS — VALUE
+
+Give the most useful information about ${topic}.
+
+25–35 SECONDS — PAYOFF
+
+Reveal the key takeaway.
+
+35–40 SECONDS — CTA
+
+If this was useful, follow for more quick tips.
+
+`;
+
+        }
+
+
+        /* ===============================
+           TONE
+           =============================== */
+
+        script +=
+`PRESENTATION STYLE
+
+Tone: ${formatTone(tone)}
+
+Keep the delivery natural, clear and easy to follow.
+
+Avoid unnecessary filler and focus on useful information.
+
+`;
+
+
+        /* ===============================
+           EXTRA DETAILS
+           =============================== */
+
+        if (details) {
+
+            script +=
+`CREATOR NOTES
+
+Include these points where relevant:
+
+${details}
+
+`;
+
+        }
+
+
+        /* ===============================
+           CTA
+           =============================== */
+
+        script +=
+`CALL TO ACTION
+
+If you found this video helpful, like the video and subscribe for more content.
+
+Let me know in the comments what you want to see next.
+
+`;
+
+
+        /* ===============================
+           OUTRO
+           =============================== */
+
+        script +=
+`OUTRO
+
+Thanks for watching!
+
+I'll see you in the next video.
+
+`;
+
+
+        document.getElementById(
+            "scriptOutput"
+        ).textContent =
+            script;
+
+
+        document.getElementById(
+            "result"
+        ).classList.add(
+            "show"
+        );
+
+
+        document.getElementById(
+            "result"
+        ).scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "start"
+
+        });
+
+    }
+
+
+    /* ===============================
+       TONE FORMAT
+       =============================== */
+
+    function formatTone(
+        tone
+    ) {
+
+        const tones = {
+
+            friendly:
+                "Friendly and conversational",
+
+            professional:
+                "Professional and informative",
+
+            exciting:
+                "Energetic and exciting",
+
+            educational:
+                "Clear and educational",
+
+            storytelling:
+                "Natural and storytelling-focused"
+
+        };
+
+
+        return (
+            tones[tone] ||
+            "Natural and conversational"
+        );
+
+    }
+
+
+    /* ===============================
+       COPY SCRIPT
+       =============================== */
+
+    function copyScript() {
+
+
+        const script =
+            document.getElementById(
+                "scriptOutput"
+            ).textContent;
+
+
+        if (!script) {
+
+            return;
+
+        }
+
+
+        navigator.clipboard
+            .writeText(script)
+            .then(
+                function() {
+
+
+                    const button =
+                        document.querySelector(
+                            ".copy-btn"
+                        );
+
+
+                    const original =
+                        button.textContent;
+
+
+                    button.textContent =
+                        "Copied ✓";
+
+
+                    setTimeout(
+                        function() {
+
+                            button.textContent =
+                                original;
+
+                        },
+                        1500
+                    );
+
+                }
+            )
+            .catch(
+                function() {
+
+                    alert(
+                        "Copy failed. Please copy the script manually."
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* ===============================
+       RESET
+       =============================== */
+
+    function resetGenerator() {
+
+
+        document.getElementById(
+            "topic"
+        ).value = "";
+
+
+        document.getElementById(
+            "videoType"
+        ).value =
+            "tutorial";
+
+
+        document.getElementById(
+            "tone"
+        ).value =
+            "friendly";
+
+
+        document.getElementById(
+            "audience"
+        ).value = "";
+
+
+        document.getElementById(
+            "details"
+        ).value = "";
+
+
+        document.getElementById(
+            "scriptOutput"
+        ).textContent = "";
+
+
+        document.getElementById(
+            "result"
+        ).classList.remove(
+            "show"
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

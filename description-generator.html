@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Free YouTube Description Generator. Create structured YouTube descriptions with keywords, hashtags and calls to action.">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <title>YouTube Description Generator - YTBoostKit</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* =================================
+           TOOL PAGE
+           ================================= */
+
+        .tool-page {
+            padding: 70px 0 90px;
+        }
+
+        .tool-header {
+            max-width: 760px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .tool-header .label {
+            color: #635bff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .tool-header h1 {
+            margin-top: 12px;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .tool-header p {
+            margin-top: 18px;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* =================================
+           GENERATOR
+           ================================= */
+
+        .generator {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 35px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* =================================
+           INPUTS
+           ================================= */
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .input-group input,
+        .input-group textarea {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            box-sizing: border-box;
+        }
+
+        .input-group input {
+            height: 52px;
+        }
+
+        .input-group textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+
+            border-color: #635bff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99, 91, 255, 0.1);
+        }
+
+        .input-help {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+        }
+
+
+        /* =================================
+           BUTTONS
+           ================================= */
+
+        .button-row {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 10px;
+        }
+
+        .generate-btn,
+        .reset-btn {
+
+            flex: 1;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .generate-btn {
+
+            background: #635bff;
+
+            color: white;
+        }
+
+        .generate-btn:hover {
+
+            background: #5148e8;
+        }
+
+        .reset-btn {
+
+            background: #f3f4f6;
+
+            color: #374151;
+        }
+
+        .reset-btn:hover {
+
+            background: #e5e7eb;
+        }
+
+
+        /* =================================
+           OUTPUT
+           ================================= */
+
+        .result {
+
+            display: none;
+
+            margin-top: 30px;
+        }
+
+        .result.show {
+
+            display: block;
+        }
+
+        .result-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 10px;
+        }
+
+        .result-header h2 {
+
+            margin: 0;
+
+            font-size: 20px;
+        }
+
+        .copy-btn {
+
+            border: none;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            padding: 10px 16px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+
+            background: #e5e7eb;
+        }
+
+        .output {
+
+            width: 100%;
+
+            min-height: 360px;
+
+            padding: 20px;
+
+            box-sizing: border-box;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            white-space: pre-wrap;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            color: #374151;
+
+            overflow-wrap: break-word;
+        }
+
+
+        /* =================================
+           CONTENT
+           ================================= */
+
+        .content-section {
+
+            max-width: 800px;
+
+            margin: 70px auto 0;
+        }
+
+        .content-section h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+        }
+
+        .content-section p {
+
+            margin-bottom: 18px;
+
+            color: #4b5563;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* =================================
+           MOBILE
+           ================================= */
+
+        @media (max-width: 650px) {
+
+            .tool-page {
+
+                padding:
+                    50px 0 70px;
+            }
+
+            .generator {
+
+                padding: 24px;
+            }
+
+            .button-row {
+
+                flex-direction: column;
+            }
+
+            .result-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     HEADER
+     ================================= -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span>YT</span>BoostKit
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#tools">
+                Tools
+            </a>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <a href="../index.html#tools"
+           class="nav-button">
+
+            All Tools
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =================================
+     MAIN
+     ================================= -->
+
+<main>
+
+<section class="tool-page">
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="tool-header">
+
+            <span class="label">
+                FREE YOUTUBE TOOL
+            </span>
+
+            <h1>
+                YouTube Description Generator
+            </h1>
+
+            <p>
+                Create a structured YouTube description
+                using your title, topic and keywords.
+            </p>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- GENERATOR -->
+
+        <div class="generator">
+
+
+            <!-- TITLE -->
+
+            <div class="input-group">
+
+                <label for="videoTitle">
+                    Video Title
+                </label>
+
+                <input
+                    type="text"
+                    id="videoTitle"
+                    placeholder="Example: 10 Amazing Gardening Tips for Beginners"
+                    maxlength="150">
+
+            </div>
+
+
+            <!-- TOPIC -->
+
+            <div class="input-group">
+
+                <label for="videoTopic">
+                    Video Topic
+                </label>
+
+                <textarea
+                    id="videoTopic"
+                    placeholder="Describe what your video is about..."></textarea>
+
+            </div>
+
+
+            <!-- KEYWORDS -->
+
+            <div class="input-group">
+
+                <label for="keywords">
+                    Keywords
+                </label>
+
+                <input
+                    type="text"
+                    id="keywords"
+                    placeholder="gardening, gardening tips, plants, garden">
+
+                <span class="input-help">
+                    Separate keywords with commas.
+                </span>
+
+            </div>
+
+
+            <!-- CTA -->
+
+            <div class="input-group">
+
+                <label for="cta">
+                    Call To Action
+                </label>
+
+                <input
+                    type="text"
+                    id="cta"
+                    placeholder="Subscribe for more gardening tips">
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-row">
+
+                <button
+                    class="generate-btn"
+                    onclick="generateDescription()">
+
+                    Generate Description
+
+                </button>
+
+
+                <button
+                    class="reset-btn"
+                    onclick="resetGenerator()">
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result">
+
+
+                <div class="result-header">
+
+                    <h2>
+                        Generated Description
+                    </h2>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyDescription()">
+
+                        Copy Description
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="output"
+                    id="output">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AD -->
+
+        <div class="ad-box">
+            Advertisement
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content-section">
+
+
+            <h2>
+                What Does This Tool Do?
+            </h2>
+
+            <p>
+                This free description generator creates a
+                structured starting point for your YouTube
+                description. It uses the information you
+                provide rather than automatically copying
+                content from another website.
+            </p>
+
+
+            <h2>
+                How to Use It
+            </h2>
+
+            <p>
+                Enter your video title, describe the topic,
+                add relevant keywords and optionally enter
+                a call to action. The generator will create
+                a formatted description that you can edit
+                before publishing.
+            </p>
+
+
+            <h2>
+                Important Note
+            </h2>
+
+            <p>
+                Always review and personalize the generated
+                description so that it accurately represents
+                your video. Do not add unrelated keywords
+                simply to attract search traffic.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =================================
+     FOOTER
+     ================================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <div class="footer-logo">
+
+                <span>YT</span>BoostKit
+
+            </div>
+
+            <p>
+                Free tools for smarter YouTube growth.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Tools
+            </h4>
+
+            <a href="ctr.html">
+                CTR Calculator
+            </a>
+
+            <a href="watch-time.html">
+                Watch Time
+            </a>
+
+            <a href="engagement.html">
+                Engagement
+            </a>
+
+            <a href="subscriber.html">
+                Subscriber Growth
+            </a>
+
+            <a href="title-analyzer.html">
+                Title Analyzer
+            </a>
+
+            <a href="description-generator.html">
+                Description Generator
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Resources
+            </h4>
+
+            <a href="../index.html#guides">
+                Guides
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Legal
+            </h4>
+
+            <a href="../privacy.html">
+                Privacy Policy
+            </a>
+
+            <a href="../terms.html">
+                Terms
+            </a>
+
+            <a href="../disclaimer.html">
+                Disclaimer
+            </a>
+			<a href="../about.html">
+				About
+			</a>
+			<a href="../contact.html">
+				Contact
+			</a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 YTBoostKit. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- =================================
+     JAVASCRIPT
+     ================================= -->
+
+<script>
+
+
+    /* =================================
+       GENERATE DESCRIPTION
+       ================================= */
+
+    function generateDescription() {
+
+
+        const title =
+            document.getElementById(
+                "videoTitle"
+            ).value.trim();
+
+
+        const topic =
+            document.getElementById(
+                "videoTopic"
+            ).value.trim();
+
+
+        const keywordInput =
+            document.getElementById(
+                "keywords"
+            ).value.trim();
+
+
+        const cta =
+            document.getElementById(
+                "cta"
+            ).value.trim();
+
+
+        /* =================================
+           VALIDATION
+           ================================= */
+
+        if (!title) {
+
+            alert(
+                "Please enter your video title."
+            );
+
+            return;
+
+        }
+
+
+        if (!topic) {
+
+            alert(
+                "Please describe your video topic."
+            );
+
+            return;
+
+        }
+
+
+        /* =================================
+           KEYWORDS
+           ================================= */
+
+        let keywordList = [];
+
+
+        if (keywordInput) {
+
+            keywordList =
+                keywordInput
+                    .split(",")
+                    .map(function(keyword) {
+
+                        return keyword.trim();
+
+                    })
+                    .filter(function(keyword) {
+
+                        return keyword.length > 0;
+
+                    });
+
+        }
+
+
+        /* =================================
+           HASHTAGS
+           ================================= */
+
+        const hashtags =
+            keywordList
+                .slice(0, 5)
+                .map(function(keyword) {
+
+                    return "#" +
+                        keyword
+                            .replace(
+                                /[^a-zA-Z0-9]/g,
+                                ""
+                            );
+
+                })
+                .filter(function(tag) {
+
+                    return tag.length > 1;
+
+                })
+                .join(" ");
+
+
+        /* =================================
+           KEYWORD TEXT
+           ================================= */
+
+        let keywordText =
+            keywordList.join(", ");
+
+
+        if (!keywordText) {
+
+            keywordText =
+                title;
+
+        }
+
+
+        /* =================================
+           CTA
+           ================================= */
+
+        let callToAction =
+            cta;
+
+
+        if (!callToAction) {
+
+            callToAction =
+                "Subscribe for more videos and useful tips.";
+
+        }
+
+
+        /* =================================
+           DESCRIPTION
+           ================================= */
+
+        const description =
+
+            title +
+
+            "\n\n" +
+
+            topic +
+
+            "\n\n" +
+
+            "In this video, you'll learn useful information " +
+            "related to " +
+            keywordText +
+            "." +
+
+            "\n\n" +
+
+            "If you find this video helpful, " +
+            "please like the video and share it with others " +
+            "who may find it useful." +
+
+            "\n\n" +
+
+            callToAction +
+
+            "\n\n" +
+
+            "Keywords: " +
+            keywordText +
+
+            "\n\n" +
+
+            hashtags;
+
+
+        /* =================================
+           OUTPUT
+           ================================= */
+
+        document.getElementById(
+            "output"
+        ).textContent =
+            description;
+
+
+        document.getElementById(
+            "result"
+        ).classList.add("show");
+
+
+        /* =================================
+           SCROLL
+           ================================= */
+
+        document.getElementById(
+            "result"
+        ).scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "start"
+
+        });
+
+    }
+
+
+    /* =================================
+       COPY
+       ================================= */
+
+    function copyDescription() {
+
+
+        const output =
+            document.getElementById(
+                "output"
+            ).textContent;
+
+
+        if (!output) {
+
+            return;
+
+        }
+
+
+        navigator.clipboard
+            .writeText(output)
+            .then(function() {
+
+                const button =
+                    document.querySelector(
+                        ".copy-btn"
+                    );
+
+
+                const originalText =
+                    button.textContent;
+
+
+                button.textContent =
+                    "Copied ✓";
+
+
+                setTimeout(
+                    function() {
+
+                        button.textContent =
+                            originalText;
+
+                    },
+                    1500
+                );
+
+            })
+            .catch(function() {
+
+                alert(
+                    "Copy failed. Please select and copy the text manually."
+                );
+
+            });
+
+    }
+
+
+    /* =================================
+       RESET
+       ================================= */
+
+    function resetGenerator() {
+
+
+        document.getElementById(
+            "videoTitle"
+        ).value = "";
+
+
+        document.getElementById(
+            "videoTopic"
+        ).value = "";
+
+
+        document.getElementById(
+            "keywords"
+        ).value = "";
+
+
+        document.getElementById(
+            "cta"
+        ).value = "";
+
+
+        document.getElementById(
+            "output"
+        ).textContent = "";
+
+
+        document.getElementById(
+            "result"
+        ).classList.remove("show");
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
