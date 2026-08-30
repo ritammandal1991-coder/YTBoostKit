@@ -100,5 +100,21 @@
     <url>
         <loc>https://ytboostkit.ytboostkit.workers.dev/tools/video-checklist.html</loc>
     </url>
+	
+	<url>
+        <loc>https://ytboostkit.ytboostkit.workers.dev/guides/youtube-description-guide.html</loc>
+    </url>
+
+    <url>
+        <loc>https://ytboostkit.ytboostkit.workers.dev/guides/youtube-keyword-research-guide.html</loc>
+    </url>
+
+    <url>
+        <loc>https://ytboostkit.ytboostkit.workers.dev/guides/youtube-tags-guide.html</loc>
+    </url>
+
+    <url>
+        <loc>https://ytboostkit.ytboostkit.workers.dev/guides/youtube-thumbnail-guide.html</loc>
+    </url>
 
 </urlset>
