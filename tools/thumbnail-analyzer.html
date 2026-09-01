@@ -13,6 +13,37 @@
 
     <meta name="robots"
           content="index, follow">
+	
+	<link rel="canonical"
+      href="https://ytboostkit.ytboostkit.workers.dev/tools/thumbnail-analyzer.html">
+
+
+	<!-- Open Graph -->
+
+	<meta property="og:title"
+		  content="YouTube Thumbnail Analyzer - YTBoostKit">
+
+	<meta property="og:description"
+		  content="Free YouTube Thumbnail Analyzer. Check thumbnail dimensions, aspect ratio, file size and basic optimization factors.">
+
+	<meta property="og:type"
+		  content="website">
+
+	<meta property="og:url"
+		  content="https://ytboostkit.ytboostkit.workers.dev/tools/thumbnail-analyzer.html">
+
+
+	<!-- Twitter -->
+
+	<meta name="twitter:card"
+		  content="summary">
+
+	<meta name="twitter:title"
+		  content="YouTube Thumbnail Analyzer - YTBoostKit">
+
+	<meta name="twitter:description"
+		  content="Check YouTube thumbnail dimensions, aspect ratio, file size and basic optimization factors.">
+	
 
     <title>YouTube Thumbnail Analyzer - YTBoostKit</title>
 
@@ -456,6 +487,519 @@
         }
 
     </style>
+	
+	<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Free YouTube Thumbnail Analyzer. Check thumbnail dimensions, aspect ratio, file size and basic optimization factors.">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <link rel="canonical"
+          href="https://ytboostkit.ytboostkit.workers.dev/tools/thumbnail-analyzer.html">
+
+
+    <!-- Open Graph -->
+
+    <meta property="og:title"
+          content="YouTube Thumbnail Analyzer - YTBoostKit">
+
+    <meta property="og:description"
+          content="Free YouTube Thumbnail Analyzer. Check thumbnail dimensions, aspect ratio, file size and basic optimization factors.">
+
+    <meta property="og:type"
+          content="website">
+
+    <meta property="og:url"
+          content="https://ytboostkit.ytboostkit.workers.dev/tools/thumbnail-analyzer.html">
+
+
+    <!-- Twitter -->
+
+    <meta name="twitter:card"
+          content="summary">
+
+    <meta name="twitter:title"
+          content="YouTube Thumbnail Analyzer - YTBoostKit">
+
+    <meta name="twitter:description"
+          content="Check YouTube thumbnail dimensions, aspect ratio, file size and basic optimization factors.">
+
+
+    <title>YouTube Thumbnail Analyzer - YTBoostKit</title>
+
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+
+    <style>
+
+        .tool-page {
+            padding: 70px 0 90px;
+        }
+
+        .tool-header {
+            max-width: 760px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .tool-header .label {
+            color: #635bff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .tool-header h1 {
+            margin-top: 12px;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .tool-header p {
+            margin-top: 18px;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* ===============================
+           ANALYZER
+           =============================== */
+
+        .analyzer-box {
+
+            max-width: 850px;
+
+            margin: 0 auto;
+
+            padding: 35px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.06);
+
+        }
+
+
+        /* ===============================
+           UPLOAD
+           =============================== */
+
+        .upload-area {
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            border: 2px dashed #d1d5db;
+
+            border-radius: 15px;
+
+            background: #f9fafb;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+        .upload-area:hover {
+
+            border-color: #635bff;
+
+            background: #f5f3ff;
+
+        }
+
+        .upload-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .upload-area h2 {
+
+            margin: 0 0 8px;
+
+            font-size: 20px;
+
+        }
+
+        .upload-area p {
+
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+        }
+
+        .upload-area input {
+
+            display: none;
+
+        }
+
+
+        /* ===============================
+           PREVIEW
+           =============================== */
+
+        .preview-section {
+
+            display: none;
+
+            margin-top: 30px;
+
+        }
+
+        .preview-section.show {
+
+            display: block;
+
+        }
+
+        .preview-image {
+
+            display: block;
+
+            width: 100%;
+
+            max-width: 700px;
+
+            max-height: 420px;
+
+            object-fit: contain;
+
+            margin: 0 auto;
+
+            border-radius: 12px;
+
+            border: 1px solid #e5e7eb;
+
+            background: #f3f4f6;
+
+        }
+
+
+        /* ===============================
+           SCORE
+           =============================== */
+
+        .score-box {
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+        }
+
+        .score-label {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+        }
+
+        .score {
+
+            margin-top: 5px;
+
+            font-size: 46px;
+
+            font-weight: 800;
+
+            color: #635bff;
+
+        }
+
+        .score-status {
+
+            margin-top: 5px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* ===============================
+           CHECKS
+           =============================== */
+
+        .checks {
+
+            display: grid;
+
+            gap: 12px;
+
+            margin-top: 25px;
+
+        }
+
+        .check-card {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 14px;
+
+            padding: 17px;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+
+        }
+
+        .check-icon {
+
+            width: 30px;
+
+            height: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #f3f4f6;
+
+            flex-shrink: 0;
+
+        }
+
+        .check-card h3 {
+
+            margin: 0 0 4px;
+
+            font-size: 15px;
+
+        }
+
+        .check-card p {
+
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ===============================
+           FILE INFO
+           =============================== */
+
+        .file-info {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 25px;
+
+        }
+
+        .info-item {
+
+            padding: 16px;
+
+            text-align: center;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 10px;
+
+        }
+
+        .info-item strong {
+
+            display: block;
+
+            font-size: 17px;
+
+            color: #111827;
+
+        }
+
+        .info-item span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+        }
+
+
+        /* ===============================
+           RESET
+           =============================== */
+
+        .reset-btn {
+
+            width: 100%;
+
+            height: 50px;
+
+            margin-top: 25px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+        .reset-btn:hover {
+
+            background: #e5e7eb;
+
+        }
+
+
+        /* ===============================
+           CONTENT
+           =============================== */
+
+        .content-section {
+
+            max-width: 850px;
+
+            margin: 70px auto 0;
+
+        }
+
+        .content-section h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+
+        }
+
+        .content-section p {
+
+            margin-bottom: 18px;
+
+            color: #4b5563;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+        }
+
+
+        /* ===============================
+           MOBILE
+           =============================== */
+
+        @media (max-width: 650px) {
+
+            .tool-page {
+
+                padding:
+                    50px 0 70px;
+
+            }
+
+            .analyzer-box {
+
+                padding: 22px;
+
+            }
+
+            .file-info {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+    </style>
+
+
+    <!-- Google Analytics -->
+
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=G-9256Z8XBYE">
+    </script>
+
+    <script>
+
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-9256Z8XBYE');
+
+    </script>
+
+</head>
 
 </head>
 
